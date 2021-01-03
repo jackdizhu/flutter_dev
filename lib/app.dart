@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 import './utils/App.dart';
 import './utils/Routes.dart';
+import './utils/Storage.dart';
 
 class AppComponent extends StatelessWidget {
-  AppComponent() {
+  AppComponent({Key key}): super(key: key) {
     App.router = Routes();
+    App.storage = Storage();
   }
 
   @override

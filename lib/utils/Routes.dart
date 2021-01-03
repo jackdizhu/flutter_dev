@@ -1,6 +1,7 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import './route_handles.dart';
+import './App.dart';
 
 class Routes {
   static FluroRouter fluroRouter = FluroRouter();
@@ -22,6 +23,11 @@ class Routes {
   }
 
   navigateTo (BuildContext context, String path) {
+    dynamic token = App.storage.getString('token');
+    if (token == '') {
+      Navigator.pushNamed(context, root);
+      return;
+    }
     Navigator.pushNamed(context, path);
     // fluroRouter.navigateTo(context, path);
   }

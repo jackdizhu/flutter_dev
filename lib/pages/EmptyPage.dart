@@ -6,6 +6,10 @@ void main() {
 }
 
 class EmptyPage extends StatelessWidget {
+  EmptyPage() {
+    App.storage.setString('token', '');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

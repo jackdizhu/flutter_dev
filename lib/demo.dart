@@ -4,7 +4,7 @@ void main() {
   runApp(Demo());
 }
 
-class Demo extends StatelessWidget {
+class Demo extends StatelessWidget { // 静态、无状态
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class Demo extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends StatefulWidget { // 动态、有状态
   MyHomePage({Key key, this.title}) : super(key: key);
   // static 在类本身上可用，而不是在类的实例上 静态方法
   // final 不可变，包含集合的final字段，则该集合仍然可变

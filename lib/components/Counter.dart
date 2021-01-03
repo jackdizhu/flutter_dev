@@ -1,28 +1,7 @@
-# flutter_dev_app
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../utils/store/CounterModel.dart';
 
-A new Flutter project
-
-## Provider
-
-1. 容易造成不必要的刷新
-2. 不支持跨页面(route)的状态，意思是跨树，如果不在一个树中，我们无法获取
-3. 数据是不可变的，必须结合StatefulWidget、ChangeNotifier或者Steam使用
-
-```dart
-// 父级组件
-void main() {
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => Counter()),
-      ],
-      child: TabsPage(),
-    ),
-  );
-}
-```
-```dart
-// 子级组件
 class CounterText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -47,4 +26,3 @@ class CounterText extends StatelessWidget {
     );
   }
 }
-```
