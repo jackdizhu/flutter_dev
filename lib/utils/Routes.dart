@@ -23,12 +23,14 @@ class Routes {
   }
 
   navigateTo (BuildContext context, String path) {
-    dynamic token = App.storage.getString('token');
-    if (token == '') {
-      Navigator.pushNamed(context, root);
-      return;
-    }
-    Navigator.pushNamed(context, path);
+    App.storage.getData<String>('token').then((value) {
+      print('token: ${value}');
+      if (value == null || value == '') {
+        Navigator.pushNamed(context, root);
+        return;
+      }
+      Navigator.pushNamed(context, path);
+    });
     // fluroRouter.navigateTo(context, path);
   }
 

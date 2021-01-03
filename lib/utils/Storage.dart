@@ -1,70 +1,51 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Storage {
-  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
-  get(String key) async {
-    final SharedPreferences prefs = await _prefs;
-    return prefs.get(key);
-  }
-
-  // getAll(String key, int param) async {
-  //   final SharedPreferences prefs = await _prefs;
-  //   return prefs.getAll();
-  // }
-
-  setInt(String key, int param) async {
-    final SharedPreferences prefs = await _prefs;
-    return prefs.setInt(key, param);
-  }
-  getInt(String key) async {
-    final SharedPreferences prefs = await _prefs;
-    dynamic res = prefs.getInt(key);
-    res ??= 0;
-    return res;
+  clearData(String key) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.clear();
   }
 
-  setDouble(String key, double param) async {
-    final SharedPreferences prefs = await _prefs;
-    return prefs.setDouble(key, param);
-  }
-  getDouble(String key) async {
-    final SharedPreferences prefs = await _prefs;
-    dynamic res = prefs.getDouble(key);
-    res ??= 0.0;
-    return res;
+  // 保存数据
+  saveData<T>(String key, T value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    switch (T) {
+      case String:
+        prefs.setString(key, value as String);
+        break;
+      case int:
+        prefs.setInt(key, value as int);
+        break;
+      case bool:
+        prefs.setBool(key, value as bool);
+        break;
+      case double:
+        prefs.setDouble(key, value as double);
+        break;
+    }
   }
 
-  setString(String key, String param) async {
-    final SharedPreferences prefs = await _prefs;
-    return prefs.setString(key, param);
-  }
-  getString(String key) async {
-    final SharedPreferences prefs = await _prefs;
-    dynamic res = prefs.getString(key);
-    res ??= '';
-    return res;
-  }
+  // 读取数据
+  Future<T> getData<T>(String key) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
 
-  setStringList(String key, List<String> param) async {
-    final SharedPreferences prefs = await _prefs;
-    return prefs.setStringList(key, param);
-  }
-  getStringList(String key) async {
-    final SharedPreferences prefs = await _prefs;
-    dynamic res = prefs.getStringList(key);
-    res ??= [];
-    return res;
-  }
-
-  setBool(String key, bool param) async {
-    final SharedPreferences prefs = await _prefs;
-    return prefs.setBool(key, param);
-  }
-  getBool(String key) async {
-    final SharedPreferences prefs = await _prefs;
-    dynamic res = prefs.getBool(key);
-    res ??= false;
+    T res;
+    switch (T) {
+      case String:
+        res = prefs.getString(key) as T;
+        break;
+      case int:
+        res = prefs.getInt(key) as T;
+        break;
+      case bool:
+        res = prefs.getBool(key) as T;
+        break;
+      case double:
+        res = prefs.getDouble(key) as T;
+        break;
+    }
     return res;
   }
 }

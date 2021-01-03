@@ -20,7 +20,7 @@ void main() {
 class TabsPage extends StatelessWidget {
   const TabsPage({Key key}) : super(key: key);
   _setToken () {
-    App.storage.setString('token', '--token--');
+    App.storage.saveData('token', '--token--');
   }
 
   @override

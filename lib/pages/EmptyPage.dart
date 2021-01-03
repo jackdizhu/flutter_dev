@@ -7,7 +7,7 @@ void main() {
 
 class EmptyPage extends StatelessWidget {
   EmptyPage() {
-    App.storage.setString('token', '');
+    App.storage.saveData('token', '');
   }
 
   @override

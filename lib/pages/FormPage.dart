@@ -19,9 +19,18 @@ class FormPage extends StatefulWidget { // 动态、有状态
 }
 
 class _FormPageState extends State<FormPage> {
-  dynamic _token = App.storage.getString('token');
-  // String _token = 'token__';
+  String _token = '';
   int _counter = 0; // _下划线开头，私有state
+
+  @override
+  void initState() {
+    super.initState();
+    App.storage.getData<String>('token').then((value) {
+      setState(() {
+        _token = value;
+      });
+    });
+  }
 
   void _incrementCounter() {
     // 调用setState更新状态
