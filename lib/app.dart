@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import './utils/App.dart';
-import './utils/Routes.dart';
-import './utils/Storage.dart';
+import 'package:flutter_dev_app/utils/app.dart';
+import 'package:flutter_dev_app/utils/routes.dart';
+import 'package:flutter_dev_app/utils/storage.dart';
 
 class AppComponent extends StatelessWidget {
   AppComponent({Key key}): super(key: key) {

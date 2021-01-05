@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../utils/store/CounterModel.dart';
-import '../components/Counter.dart';
-import '../utils/App.dart';
+import 'package:flutter_dev_app/utils/store/counterModel.dart';
+import 'package:flutter_dev_app/components/counter.dart';
+import 'package:flutter_dev_app/utils/app.dart';
 
 void main() {
   runApp(

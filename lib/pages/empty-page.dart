@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../utils/App.dart';
+import 'package:flutter_dev_app/utils/app.dart';
 
 void main() {
   runApp(EmptyPage());

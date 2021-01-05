@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../utils/store/CounterModel.dart';
+import 'package:flutter_dev_app/utils/store/counterModel.dart';
 
 class CounterText extends StatelessWidget {
   @override

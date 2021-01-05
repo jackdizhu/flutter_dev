@@ -1,8 +1,8 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
-import '../pages/TabsPage.dart';
-import '../pages/FormPage.dart';
-import '../pages/EmptyPage.dart';
+import 'package:flutter_dev_app/pages/tabs-page.dart';
+import 'package:flutter_dev_app/pages/form-page.dart';
+import 'package:flutter_dev_app/pages/empty-page.dart';
 
 // 空页面
 var emptyHandler = new Handler(

@@ -1,7 +1,7 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
-import './route_handles.dart';
-import './App.dart';
+import 'package:flutter_dev_app/utils/route_handles.dart';
+import 'package:flutter_dev_app/utils/app.dart';
 
 class Routes {
   static FluroRouter fluroRouter = FluroRouter();
@@ -24,7 +24,7 @@ class Routes {
 
   navigateTo (BuildContext context, String path) {
     App.storage.getData<String>('token').then((value) {
-      print('token: ${value}');
+      print('token: $value');
       if (value == null || value == '') {
         Navigator.pushNamed(context, root);
         return;
