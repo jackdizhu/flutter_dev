@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
       title: 'Fluro Dev App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        shadowColor: Colors.black,
         primarySwatch: Colors.blue,
       ),
       onGenerateRoute: App.router.generator,

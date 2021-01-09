@@ -11,6 +11,7 @@ class Routes {
   static String root = "/";
   static String form = "/form-page";
   static String empty = "/empty-page";
+  static String bar = "/bar-page";
 
   goHome (BuildContext context) {
     // fluroRouter.navigateTo(context, root);
@@ -25,10 +26,10 @@ class Routes {
   navigateTo (BuildContext context, String path) {
     App.storage.getData<String>('token').then((value) {
       print('token: $value');
-      if (value == null || value == '') {
-        Navigator.pushNamed(context, root);
-        return;
-      }
+      // if (value == null || value == '') {
+      //   Navigator.pushNamed(context, root);
+      //   return;
+      // }
       Navigator.pushNamed(context, path);
     });
     // fluroRouter.navigateTo(context, path);
@@ -38,6 +39,21 @@ class Routes {
     fluroRouter.define(root, handler: homeHandler);
     fluroRouter.define(form, handler: formHandler);
     fluroRouter.define(empty, handler: emptyHandler);
+
+    List demoList = getDemoList();
+    // fluroRouter.define(bar, handler: barHandler);
+
+    demoList.forEach((item) {
+      String path = item.routerName.toLowerCase();
+      print('$path');
+      fluroRouter.define(
+        '$path',
+        handler: new Handler(
+        handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+          return item.buildRouter(context);
+        })
+      );
+    });
     fluroRouter.notFoundHandler = emptyHandler; // 空页面
   }
 }

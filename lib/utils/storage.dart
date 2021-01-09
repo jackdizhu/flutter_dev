@@ -7,6 +7,11 @@ class Storage {
     prefs.clear();
   }
 
+  removeData(String key) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove(key);
+  }
+
   // 保存数据
   saveData<T>(String key, T value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
