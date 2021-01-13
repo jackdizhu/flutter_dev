@@ -12,15 +12,15 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (_) => Counter()),
       ],
-      child: TabsPage(),
+      child: DemoPage(),
     ),
   );
 }
 
 
-class TabsPage extends StatelessWidget {
+class DemoPage extends StatelessWidget {
   List list = [];
-  TabsPage({Key key}) : super(key: key) {
+  DemoPage({Key key}) : super(key: key) {
     list = getRouterName();
   }
   _setToken () {
@@ -47,7 +47,7 @@ class TabsPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("TabsPage"),
+        title: Text("DemoPage"),
       ),
       body: listView,
     );

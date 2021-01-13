@@ -9,6 +9,7 @@ class Routes {
   final generator = fluroRouter.generator;
 
   static String root = "/";
+  static String demo = "/demo-page";
   static String form = "/form-page";
   static String empty = "/empty-page";
   static String bar = "/bar-page";
@@ -36,7 +37,8 @@ class Routes {
   }
 
   Routes () {
-    fluroRouter.define(root, handler: homeHandler);
+    fluroRouter.define(root, handler: rootHandler);
+    fluroRouter.define(demo, handler: demoHandler);
     fluroRouter.define(form, handler: formHandler);
     fluroRouter.define(empty, handler: emptyHandler);
 

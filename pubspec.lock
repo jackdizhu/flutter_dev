@@ -126,7 +126,7 @@ packages:
       name: dio
       url: "https://mirrors.tuna.tsinghua.edu.cn/dart-pub"
     source: hosted
-    version: "2.2.2"
+    version: "3.0.10"
   event_bus:
     dependency: "direct main"
     description:
@@ -201,6 +201,13 @@ packages:
       url: "https://mirrors.tuna.tsinghua.edu.cn/dart-pub"
     source: hosted
     version: "1.2.0"
+  http_parser:
+    dependency: transitive
+    description:
+      name: http_parser
+      url: "https://mirrors.tuna.tsinghua.edu.cn/dart-pub"
+    source: hosted
+    version: "3.1.4"
   image_picker:
     dependency: "direct main"
     description:

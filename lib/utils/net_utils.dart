@@ -1,55 +1,107 @@
-import 'dart:async';
-import 'dart:io';
-import 'package:cookie_jar/cookie_jar.dart';
+// import 'dart:async';
+// import 'dart:io';
+// import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:dio/adapter.dart';
+// import 'package:path_provider/path_provider.dart';
 
-Map<String, dynamic> optHeader = {
-  'accept-language': 'zh-cn',
-  'content-type': 'application/json'
-};
+class HttpUtil {
 
-var dio = new Dio(BaseOptions(connectTimeout: 30000, headers: optHeader));
+  Dio dio;
 
-class NetUtils {
-  static Future get(String url, [Map<String, dynamic> params]) async {
-    var response;
+  // 请求服务器地址
+  String baseUrl =  '';
 
-    // 设置代理 便于本地 charles 抓包
-    // (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-    //     (HttpClient client) {
-    //   client.findProxy = (uri) {
-    //     return "PROXY 30.10.24.79:8889";
-    //   };
-    // };
+  // content-type
+  Map contentType = {
+    'json': "application/json",
+    'form': "application/x-www-form-urlencoded"
+  };
 
-    Directory documentsDir = await getApplicationDocumentsDirectory();
-    String documentsPath = documentsDir.path;
-    var dir = new Directory("$documentsPath/cookies");
-    await dir.create();
-    dio.interceptors.add(CookieManager(PersistCookieJar(dir: dir.path)));
-    if (params != null) {
-      response = await dio.get(url, queryParameters: params);
-    } else {
-      response = await dio.get(url);
+  /*
+   * config it and create
+   */
+  HttpUtil() {
+    // 初始化 Dio
+    dio = new Dio(new BaseOptions(
+      baseUrl: baseUrl,        // 请求的baseUrl
+      connectTimeout: 30000,    // 连接超时时间
+      receiveTimeout: 30000,    // 响应超时时间
+      contentType: contentType['json'],
+    ));
+
+    // 配置代理
+    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (client) {
+      // client.findProxy = (uri) {
+      //   //proxy all request to localhost:8888
+      //   return "PROXY localhost:8888";
+      // };
+    };
+
+    // 请求拦击
+    dio.interceptors.add(InterceptorsWrapper(
+      onRequest: (RequestOptions options){
+        // 请求拦截
+        print('onRequest---- $options');
+        return options;
+      },
+      onResponse: (Response response){
+        // 响应拦截
+        print('onResponse---- $response');
+        return response;
+      },
+      onError: (DioError err){
+        // 错误数据拦截
+        print('onError---- $err');
+        return err;
+      }
+    ));
+  }
+
+  /*
+   * get请求
+   */
+  get(url, {data, options, cancelToken}) async {
+    Response response;
+    print('get url---- ${url}');
+    try {
+      response = await dio.get(url, queryParameters: data, options: options, cancelToken: cancelToken);
+      print('get success---- ${response.statusCode}');
+      // response.data; 响应体
+      // response.headers; 响应头
+      // response.request; 请求体
+      // response.statusCode; 状态码
+    } on DioError catch (e) {
+      print('get error---- $e');
     }
     return response.data;
   }
 
-  static Future post(String url, Map<String, dynamic> params) async {
-    // // 设置代理 便于本地 charles 抓包
-    // (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-    //     (HttpClient client) {
-    //   client.findProxy = (uri) {
-    //     return "PROXY 30.10.24.79:8889";
-    //   };
-    // };
-    Directory documentsDir = await getApplicationDocumentsDirectory();
-    String documentsPath = documentsDir.path;
-    var dir = new Directory("$documentsPath/cookies");
-    await dir.create();
-    dio.interceptors.add(CookieManager(PersistCookieJar(dir: dir.path)));
-    var response = await dio.post(url, data: params);
+  /*
+   * post请求
+   */
+  post(url, {data, options, cancelToken}) async {
+    Response response;
+    try {
+      response = await dio.post(url, queryParameters: data, options: options, cancelToken: cancelToken);
+      print('post success---- ${response.statusCode}');
+    } on DioError catch (e) {
+      print('post error---- $e');
+    }
+    return response.data;
+  }
+  /*
+   * post请求
+   */
+  postForm(url, {data, options, cancelToken}) async {
+    Response response;
+    FormData formData = FormData.fromMap(data);
+    try {
+      response = await dio.post(url, data: formData, options: options, cancelToken: cancelToken);
+      print('post success---- ${response.statusCode}');
+    } on DioError catch (e) {
+      print('post error---- $e');
+    }
     return response.data;
   }
 }

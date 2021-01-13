@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dev_app/utils/app.dart';
 import 'package:flutter_dev_app/utils/routes.dart';
 import 'package:flutter_dev_app/utils/storage.dart';
+import 'package:flutter_dev_app/utils/net_utils.dart';
 
 class AppComponent extends StatelessWidget {
   AppComponent({Key key}): super(key: key) {
     App.router = Routes();
     App.storage = Storage();
+    App.http = HttpUtil();
   }
 
   @override

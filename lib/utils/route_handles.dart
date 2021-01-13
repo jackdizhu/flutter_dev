@@ -1,7 +1,8 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_dev_app/demo/widget_demo.dart';
-import 'package:flutter_dev_app/pages/tabs-page.dart';
+import 'package:flutter_dev_app/pages/index-page.dart';
+import 'package:flutter_dev_app/pages/demo-page.dart';
 import 'package:flutter_dev_app/pages/form-page.dart';
 import 'package:flutter_dev_app/pages/empty-page.dart';
 // import 'package:flutter_dev_app/pages/bar-page.dart';
@@ -37,9 +38,14 @@ var emptyHandler = new Handler(
 //   });
     
 // 首页
-var homeHandler = new Handler(
+var rootHandler = new Handler(
   handlerFunc: (BuildContext context, Map<String, List<Object>> params) {
-    return TabsPage();
+    return IndexPage();
+  });
+// 首页
+var demoHandler = new Handler(
+  handlerFunc: (BuildContext context, Map<String, List<Object>> params) {
+    return DemoPage();
   });
 
 var formHandler = new Handler(
